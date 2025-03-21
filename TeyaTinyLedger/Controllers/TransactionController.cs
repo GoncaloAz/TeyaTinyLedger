@@ -28,11 +28,11 @@ namespace TeyaTinyLedger.Controllers
 
             if (result == "User does not exist")
             {
-                return NotFound(result);
+                return NotFound(new { message = result });
             }
             else if (result == "Insufficient balance")
             {
-                return BadRequest(result);
+                return BadRequest(new { message = result });
             }
 
             return Ok(new { message = result });

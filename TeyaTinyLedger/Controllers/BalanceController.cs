@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TeyaTinyLedger.DTOs;
-using TeyaTinyLedger.Service;
 using TeyaTinyLedger.Service.Interfaces;
 
 namespace TeyaTinyLedger.Controllers
