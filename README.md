@@ -30,6 +30,8 @@ To run the application, follow these steps:
 
 ## Testing the API
 
+Some test data is already preloaded into the application with users id 1 and 2
+
 **The following endpoints are available:**
 
 **Get User Blanace by User Id:**
