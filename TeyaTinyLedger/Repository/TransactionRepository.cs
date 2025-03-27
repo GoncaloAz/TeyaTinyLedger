@@ -10,12 +10,28 @@ namespace TeyaTinyLedger.Repository
 
         public void AddTransaction(LedgerTransaction transaction)
         {
-            if (!_userTransactions.ContainsKey(transaction.UserId))
+            if (!_userTransactions.ContainsKey(transaction.UserIdFrom))
             {
-                _userTransactions[transaction.UserId] = new List<LedgerTransaction>();
+                _userTransactions[transaction.UserIdFrom] = new List<LedgerTransaction>();
             }
 
-            _userTransactions[transaction.UserId].Add(transaction);
+            _userTransactions[transaction.UserIdFrom].Add(transaction);
+        }
+
+        public void AddTransactionTransfer(LedgerTransaction transactionWithdraw, LedgerTransaction transactionDeposit)
+        {
+            if (!_userTransactions.ContainsKey(transactionWithdraw.UserIdFrom))
+            {
+                _userTransactions[transactionWithdraw.UserIdFrom] = new List<LedgerTransaction>();
+            }
+
+            if (!_userTransactions.ContainsKey(transactionDeposit.UserIdTo))
+            {
+                _userTransactions[transactionDeposit.UserIdTo] = new List<LedgerTransaction>();
+            }
+
+            _userTransactions[transactionWithdraw.UserIdFrom].Add(transactionWithdraw);
+            _userTransactions[transactionDeposit.UserIdTo].Add(transactionDeposit);
         }
 
         public List<LedgerTransaction> GetTransactions(int userId)

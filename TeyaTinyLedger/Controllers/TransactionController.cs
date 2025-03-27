@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TeyaTinyLedger.Domain;
 using TeyaTinyLedger.DTOs;
 using TeyaTinyLedger.Service;
 using TeyaTinyLedger.Service.Interfaces;
@@ -24,7 +25,15 @@ namespace TeyaTinyLedger.Controllers
                 transactionDto.Timestamp = DateTime.UtcNow;
             }
 
-            var result = _transactionService.AddTransaction(transactionDto);
+            string result;
+            if(transactionDto.TransactionType == TransactionType.Transfer)
+            {
+               result = _transactionService.AddTransferTransaction(transactionDto);
+            }
+            else
+            {
+               result =  _transactionService.AddTransaction(transactionDto);
+            }
 
             if (result == "User does not exist")
             {

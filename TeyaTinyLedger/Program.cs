@@ -25,18 +25,18 @@ var balanceRepository = app.Services.GetRequiredService<IBalanceRepository>();
 
 var testTransactions = new List<LedgerTransaction>
 {
-    new LedgerTransaction { TransactionId = 1, UserId = 1, Amount = 100, TransactionType = TransactionType.Deposit, Timestamp = DateTime.UtcNow.AddDays(-2) },
-    new LedgerTransaction { TransactionId = 2, UserId = 1, Amount = 50, TransactionType = TransactionType.Withdrawal, Timestamp = DateTime.UtcNow.AddDays(-1) },
-    new LedgerTransaction { TransactionId = 3, UserId = 1, Amount = 200, TransactionType = TransactionType.Deposit, Timestamp = DateTime.UtcNow },
-    new LedgerTransaction { TransactionId = 4, UserId = 2, Amount = 200, TransactionType = TransactionType.Deposit, Timestamp = DateTime.UtcNow.AddDays(-1) },
-    new LedgerTransaction { TransactionId = 5, UserId = 2, Amount = 200, TransactionType = TransactionType.Withdrawal, Timestamp = DateTime.UtcNow }
+    new LedgerTransaction { TransactionId = 1, UserIdFrom = 1,UserIdTo = 1, Amount = 100, TransactionType = TransactionType.Deposit, Timestamp = DateTime.UtcNow.AddDays(-2) },
+    new LedgerTransaction { TransactionId = 2, UserIdFrom = 1,UserIdTo = 1, Amount = 50, TransactionType = TransactionType.Withdrawal, Timestamp = DateTime.UtcNow.AddDays(-1) },
+    new LedgerTransaction { TransactionId = 3, UserIdFrom = 1,UserIdTo = 1, Amount = 200, TransactionType = TransactionType.Deposit, Timestamp = DateTime.UtcNow },
+    new LedgerTransaction { TransactionId = 4, UserIdFrom = 2,UserIdTo = 2, Amount = 200, TransactionType = TransactionType.Deposit, Timestamp = DateTime.UtcNow.AddDays(-1) },
+    new LedgerTransaction { TransactionId = 5, UserIdFrom = 2,UserIdTo = 2, Amount = 200, TransactionType = TransactionType.Withdrawal, Timestamp = DateTime.UtcNow }
 };
 
 
 foreach (var transaction in testTransactions)
 {
     transactionRepository.AddTransaction(transaction);
-    balanceRepository.UpdateBalance(transaction.UserId, transaction.Amount, transaction.TransactionType);
+    balanceRepository.UpdateBalance(transaction.UserIdTo, transaction.Amount, transaction.TransactionType);
 }
 
 
